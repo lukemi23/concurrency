@@ -1,5 +1,6 @@
 ;; Concurrency in Clojure using Agents
 ;; GradPL Spring 2019 Concurrency Project
+;; Authors: Michael Luke, Zarana Parmar
 ;;
 ;; The simplest way to run is to simply paste into
 ;; an online Clojure REPL, such as https://repl.it/languages/clojure
