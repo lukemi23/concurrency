@@ -2,7 +2,7 @@
 ;; GradPL Spring 2019 Concurrency Project
 ;;
 ;; The simplest way to run is to simply paste into
-;; an online Clojure RELP, such as https://repl.it/languages/clojure
+;; an online Clojure REPL, such as https://repl.it/languages/clojure
 
 ;; Recursive function to count x down by 2, printing each time, until x <= 1
 (defn down_by_two [x]
