@@ -1,0 +1,29 @@
+;; Concurrency in Clojure using Agents
+;; GradPL Spring 2019 Concurrency Project
+;;
+;; The simplest way to run is to simply paste into
+;; an online Clojure RELP, such as https://repl.it/languages/clojure
+
+;; Recursive function to count x down by 2, printing each time, until x <= 1
+(defn down_by_two [x]
+ (if (> x 1)
+   (do (println x) (recur (- x 2)))))
+
+
+;; Dispatches an agent for each number in starting_numbers to concurrently
+;; count them all down by 2. Agents are asynchronous and independent.
+(defn parallel_countdown [starting_numbers]
+ (let [agents (doall (map #(agent %) starting_numbers))]
+   (doseq [agent agents] (send agent down_by_two))
+   (apply await-for 5000 agents)
+   (doall (map #(deref %) agents))))
+
+
+;; You will likely see the countdown from 200 begin and make some progress
+;; before the countdown from 199 begins concurrently.
+(prn(parallel_countdown '(200 199)))
+
+
+;; Works with any number of agents (though decrements always by 2).
+;; You will likely see all three countdowns from 200 start before the first finishes.
+(prn (parallel_countdown '(200 200 200)))
